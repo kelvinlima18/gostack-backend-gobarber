@@ -30,6 +30,11 @@ class User extends Model {
     return this;
   }
 
+  /* Salva referência do ID do file, dentro da TB de usuário */
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+  }
+
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
   }
